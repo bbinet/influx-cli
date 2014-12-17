@@ -138,3 +138,15 @@ ANY command above can be subject to:
 > <filename>    : redirect the output into a file
 
 ```
+
+docker
+------
+
+If you don't have a golang environment available, you can also use influx-cli
+from a docker container:
+
+```
+$ docker build -t dieterbe/influx-cli .
+
+$ docker run --rm -ti dieterbe/influx-cli
+```
