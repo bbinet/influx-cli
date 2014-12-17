@@ -150,3 +150,25 @@ $ docker build -t dieterbe/influx-cli .
 
 $ docker run --rm -ti dieterbe/influx-cli
 ```
+
+Once the `dieterbe/influx-cli` container has been built, you can also use the
+`docker-influx-cli.sh` script to run influx-cli through docker.
+
+By default, `docker-influx-cli.sh` will use InfluxDB configuration from
+`~/.influxrc` config file, but you can provide your own InfluxDB config file to
+the script.
+
+Here are some usage examples:
+```
+# enter influx-cli prompt with default config file
+$ ./docker-influx-cli.sh
+
+# enter influx-cli prompt with custom my.influxrc config file
+$ ./docker-influx-cli.sh my.influxrc
+
+# run a single query
+$ echo "select * from /pattern/ limit 10" | ./docker-influx-cli.sh
+
+# drop all series that match a request
+$ echo "list series /pattern/" | ./docker-influx-cli.sh | sed 's/.*/drop series "&"/' | ./docker-influx-cli.sh
+```
